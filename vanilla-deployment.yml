@@ -29,14 +29,14 @@ spec:
         resources:
           limits:
             memory: "2048Mi"
-            cpu: "1000m"
+            cpu: "2000m"
         env:
         - name: EULA
           value: "true"
         - name: ENABLE_AUTOPAUSE
           value: "TRUE"
-        - name: OVERRIDE_SERVER_PROPERTIES
-          value: "TRUE"
+        - name: MAX_TICK_TIME
+          value: "-1"
         ports:
         - containerPort: 25565
           name: main
@@ -46,8 +46,9 @@ spec:
             - mcstatus
             - localhost
             - ping
-          initialDelaySeconds: 300
-          periodSeconds: 5
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          failureThreshold: 100
         livenessProbe:
           exec:
             command:
